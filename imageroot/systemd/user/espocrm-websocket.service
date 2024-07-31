@@ -1,0 +1,36 @@
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+[Unit]
+Description=Podman  espocrm-websocket.service
+BindsTo=espocrm.service
+After=espocrm.service mariadb-app.service espocrm-app.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+EnvironmentFile=-%S/state/smarthost.env
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/mkdir -p tmp
+ExecStartPre=/bin/rm -f %t/espocrm-websocket.pid %t/espocrm-websocket.ctr-id
+ExecStartPre=-runagent discover-smarthost
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/espocrm-websocket.pid \
+    --cidfile %t/espocrm-websocket.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/espocrm.pod-id --replace -d --name  espocrm-websocket \
+    --env-file=%S/state/websocket.env \
+    --volume espocrm-websocket:/var/www/html/:Z \
+    --entrypoint %S/scripts/espocrm-websocket.sh \
+    ${ESPOCRM_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/espocrm-websocket.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP espocrm-websocket
+SyslogIdentifier=%u
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/espocrm-websocket.ctr-id
+PIDFile=%t/espocrm-websocket.pid
+Type=forking
+
+[Install]
+WantedBy=default.target
