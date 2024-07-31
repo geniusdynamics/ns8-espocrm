@@ -1,0 +1,35 @@
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+[Unit]
+Description=Podman  espocrm-daemon.service
+BindsTo=espocrm.service
+After=espocrm.service mariadb-app.service espocrm-app.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=%S/state/environment
+EnvironmentFile=-%S/state/smarthost.env
+WorkingDirectory=%S/state
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/mkdir -p tmp
+ExecStartPre=/bin/rm -f %t/espocrm-daemon.pid %t/espocrm-daemon.ctr-id
+ExecStartPre=-runagent discover-smarthost
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/espocrm-daemon.pid \
+    --cidfile %t/espocrm-daemon.ctr-id --cgroups=no-conmon \
+    --pod-id-file %t/espocrm.pod-id --replace -d --name  espocrm-daemon \
+    --volume espocrm-daemon:/var/www/html/:Z \
+    --entrypoint %S/scripts/espocrm-daemon.sh \
+    ${ESPOCRM_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/espocrm-daemon.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP espocrm-daemon
+SyslogIdentifier=%u
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/espocrm-daemon.ctr-id
+PIDFile=%t/espocrm-daemon.pid
+Type=forking
+
+[Install]
+WantedBy=default.target
