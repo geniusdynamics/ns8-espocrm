@@ -38,7 +38,9 @@
     "instance_configuration": "Configure espocrm",
     "domain_already_used_in_traefik": "Domain already used in traefik",
     "host_pattern": "Must be a valid fully qualified domain name",
-    "host_format": "Must be a valid fully qualified domain name"
+    "host_format": "Must be a valid fully qualified domain name",
+    "ESPOCRM_ADMIN_PASSWORD": "Espo Crm Admin password",
+    "ESPOCRM_ADMIN_USERNAME": "Espo Crm admin username"
   },
   "about": {
     "title": "About"
