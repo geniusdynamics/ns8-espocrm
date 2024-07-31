@@ -10,8 +10,8 @@
 
 [Unit]
 Description=Podman espocrm.service
-Requires=mariadb-app.service espocrm-app.service espocrm-daemon.service espocrm-websocket.service
-Before=mariadb-app.service espocrm-app.service espocrm-daemon.service espocrm-websocket.service
+Requires=mariadb-app.service espocrm-app.service
+Before=mariadb-app.service espocrm-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
