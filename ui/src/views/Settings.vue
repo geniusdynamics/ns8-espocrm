@@ -61,6 +61,27 @@
                 $t("settings.enabled")
               }}</template>
             </cv-toggle>
+            <cv-text-input
+                :label="$t('ESPOCRM_ADMIN_USERNAME')"
+                placeholder="admin"
+                v-model="ESPOCRM_ADMIN_USERNAME"
+                class="mg-bottom"
+                :invalid-message="$t(error.ESPOCRM_ADMIN_USERNAME)"
+                :disabled="loading.getConfiguration || loading.configureModule"
+                ref="ESPOCRM_ADMIN_USERNAME"
+            >
+            </cv-text-input>
+            <cv-text-input
+                :label="$t('ESPOCRM_ADMIN_PASSWORD')"
+                placeholder="************"
+                v-model="ESPOCRM_ADMIN_PASSWORD"
+                class="mg-bottom"
+                :invalid-message="$t(error.ESPOCRM_ADMIN_PASSWORD)"
+                :disabled="loading.getConfiguration || loading.configureModule"
+                ref="ESPOCRM_ADMIN_PASSWORD"
+                type="password"
+            >
+            </cv-text-input>
               <!-- advanced options -->
             <cv-accordion ref="accordion" class="maxwidth mg-bottom">
               <cv-accordion-item :open="toggleAccordion[0]">
@@ -125,6 +146,8 @@ export default {
       host: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: true,
+      ESPOCRM_ADMIN_USERNAME: "",
+      ESPOCRM_ADMIN_PASSWORD: "",
       loading: {
         getConfiguration: false,
         configureModule: false,
@@ -135,6 +158,8 @@ export default {
         host: "",
         lets_encrypt: "",
         http2https: "",
+        ESPOCRM_ADMIN_USERNAME: "",
+        ESPOCRM_ADMIN_PASSWORD: "",
       },
     };
   },
@@ -202,6 +227,8 @@ export default {
       this.host = config.host;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
+      this.ESPOCRM_ADMIN_USERNAME = config.ESPOCRM_ADMIN_USERNAME;
+      this.ESPOCRM_ADMIN_PASSWORD = config.ESPOCRM_ADMIN_PASSWORD;
 
       this.loading.getConfiguration = false;
       this.focusElement("host");
@@ -271,6 +298,8 @@ export default {
             host: this.host,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
+            ESPOCRM_ADMIN_USERNAME: this.ESPOCRM_ADMIN_USERNAME,
+            ESPOCRM_ADMIN_PASSWORD: this.ESPOCRM_ADMIN_PASSWORD,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {
