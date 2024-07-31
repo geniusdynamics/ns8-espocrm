@@ -22,8 +22,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/espocrm-daemon.pid \
     --cidfile %t/espocrm-daemon.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/espocrm.pod-id --replace -d --name  espocrm-daemon \
     --volume espocrm-app:/var/www/html/:Z \
-     --entrypoint="['/bin/bash','-c', '%S/scripts/espocrm-daemon']" \
-    ${ESPOCRM_IMAGE}
+    ${ESPOCRM_IMAGE} %S/scripts/espocrm-daemon
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/espocrm-daemon.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP espocrm-daemon
 SyslogIdentifier=%u
