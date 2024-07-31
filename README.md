@@ -7,8 +7,10 @@ To start a new module from it:
 ## Install
 
 Instantiate the module with:
-
-    add-module ghcr.io/geniusdynamics/espocrm:latest 1
+```shell
+add-module ghcr.io/geniusdynamics/espocrm:latest 1
+```
+    
 
 The output of the command will return the instance name.
 Output example:
@@ -27,7 +29,7 @@ Launch `configure-module`, by setting the following parameters:
 
 Example:
 
-```
+```shell
 api-cli run configure-module --agent module/espocrm1 --data - <<EOF
 {
   "host": "espocrm.domain.com",
@@ -44,15 +46,23 @@ The above command will:
 ## Get the configuration
 You can retrieve the configuration with
 
-```
+```shell
 api-cli run get-configuration --agent module/espocrm1
+```
+
+## Update Module
+
+```shell
+api-cli run update-module --data '{"module_url":"ghcr.io/geniusdynamics/espocrm:latest","instances":["espocrm1"],"force":true}'
 ```
 
 ## Uninstall
 
 To uninstall the instance:
-
-    remove-module --no-preserve espocrm1
+```shell
+remove-module --no-preserve espocrm1
+```
+    
 
 ## Smarthost setting discovery
 
