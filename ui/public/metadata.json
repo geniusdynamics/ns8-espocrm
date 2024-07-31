@@ -1,19 +1,19 @@
 {
   "name": "espocrm",
   "description": {
-    "en": "My espocrm module"
+    "en": "EspoCRM is a web application that allows users to see, enter and evaluate all your company relationships regardless of the type. People, companies, projects or opportunities — all in an easy and intuitive interface."
   },
   "categories": [],
   "authors": [
     {
-      "name": "Name Surname",
-      "email": "author@yourmail.org"
+      "name": "Kemboi Elvis",
+      "email": "kemboielvis@genius.ke"
     }
   ],
   "docs": {
-    "documentation_url": "https://docs.espocrm.com/",
-    "bug_url": "https://github.com/NethServer/dev",
-    "code_url": "https://github.com/author/ns8-espocrm"
+    "documentation_url": "https://espocrm.com/",
+    "bug_url": "https://github.com/geniusdynamics/dev",
+    "code_url": "https://github.com/geniusdynamics/ns8-espocrm"
   },
-  "source": "ghcr.io/nethserver/espocrm"
+  "source": "ghcr.io/geniusdynamics/espocrm"
 }
