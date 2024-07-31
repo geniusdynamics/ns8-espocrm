@@ -23,6 +23,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/espocrm-app.pid \
     --pod-id-file %t/espocrm.pod-id --replace -d --name  espocrm-app \
     --volume espocrm-app:/var/www/html/:Z \
     --env-file=%S/state/espocrm-db.env \
+    --env-file=%S/state/app.env \
     ${ESPOCRM_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/espocrm-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP espocrm-app
