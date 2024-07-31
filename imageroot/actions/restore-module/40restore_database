@@ -33,9 +33,6 @@ podman run \
   --network=none \
   --volume=./initdb.d:/docker-entrypoint-initdb.d:z \
   --volume mysql-data:/var/lib/mysql/:Z \
-  --env MARIADB_ROOT_PASSWORD=Nethesis,1234 \
-  --env MARIADB_DATABASE=espocrm \
-  --env MARIADB_USER=espocrm \
-  --env MARIADB_PASSWORD=espocrm \
+  --env-file=database.env \
   --replace --name=restore_db \
-  ${MARIADB_IMAGE}
+  "${MARIADB_IMAGE}"
