@@ -10,7 +10,11 @@ Instantiate the module with:
 ```shell
 add-module ghcr.io/geniusdynamics/espocrm:latest 1
 ```
-    
+> The Defaults are: 
+> 
+> Admin Username: admin
+> 
+> Admin Password: password
 
 The output of the command will return the instance name.
 Output example:
