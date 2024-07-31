@@ -22,7 +22,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/espocrm-websocket.pid \
     --cidfile %t/espocrm-websocket.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/espocrm.pod-id --replace -d --name  espocrm-websocket \
     --env-file=%S/state/websocket.env \
-    --volume espocrm-websocket:/var/www/html/:Z \
+    --volume espocrm-app:/var/www/html/:Z \
     --entrypoint=%S/scripts/espocrm-websocket \
     ${ESPOCRM_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/espocrm-websocket.ctr-id -t 10
