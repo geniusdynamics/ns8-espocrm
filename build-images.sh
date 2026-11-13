@@ -17,7 +17,8 @@ reponame="espocrm"
 # Node.js 25+ no longer ships Corepack, install it from npm
 # renovate: datasource=npm packageName=corepack
 corepack_version=0.36.0
-APP_VERSION="9.2-apache"
+# renovate: datasource=docker packageName=docker.io/espocrm/espocrm
+APP_VERSION=9.2-apache
 
 # Create a new empty container image
 container=$(buildah from scratch)
@@ -50,6 +51,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
+    --label="org.nethserver.min-core=3.0.0" \
     --label="org.nethserver.images=docker.io/mariadb:10.11.19 docker.io/espocrm/espocrm:${APP_VERSION}" \
     "${container}"
 # Commit the image
