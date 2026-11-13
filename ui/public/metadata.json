@@ -1,9 +1,12 @@
 {
   "name": "espocrm",
   "description": {
-    "en": "EspoCRM is a web application that allows users to see, enter and evaluate all your company relationships regardless of the type. People, companies, projects or opportunities — all in an easy and intuitive interface."
+    "en": "EspoCRM is a web application that allows users to see, enter and evaluate all your company relationships regardless of the type. People, companies, projects or opportunities — all in an easy and intuitive interface.",
+    "it": "EspoCRM è un'applicazione web per gestire i rapporti con i clienti, le vendite e le attività."
   },
-  "categories": [],
+  "categories": [
+    "office"
+  ],
   "authors": [
     {
       "name": "Kemboi Elvis",
