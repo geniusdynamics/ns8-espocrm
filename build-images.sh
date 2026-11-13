@@ -18,7 +18,7 @@ reponame="espocrm"
 # renovate: datasource=npm packageName=corepack
 corepack_version=0.36.0
 # renovate: datasource=docker packageName=docker.io/espocrm/espocrm
-APP_VERSION=9.2-apache
+APP_VERSION=9.3.10-apache
 
 # Create a new empty container image
 container=$(buildah from scratch)
